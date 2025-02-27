@@ -4,9 +4,23 @@ class Usuarios {
     private var contrasenia = ""
     private var eventosApuntados = ArrayList<Eventos>()
 
-    fun inscribirse(evento:Eventos){
-        evento.inscribirUsuario(this)
-        eventosApuntados.add(evento)
+    constructor(nombre:String,correo:String,contrasenia:String){
+        this.nombre = nombre
+        this.correo = correo
+        this.contrasenia = contrasenia
+    }
+    constructor(){
+    }
+
+
+    fun inscribirse(evento: Eventos) {
+        if (!eventosApuntados.contains(evento)) {
+            eventosApuntados.add(evento)
+            evento.personasApuntadas.add(this)
+            println("${nombre} se ha inscrito en '${evento.nombre}'")
+        } else {
+            println("${nombre} ya está inscrito en '${evento.nombre}'")
+        }
     }
 
     fun cancelarInscripcion(evento:Eventos){

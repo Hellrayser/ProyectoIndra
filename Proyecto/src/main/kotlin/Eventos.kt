@@ -1,10 +1,22 @@
 class Eventos {
     var nombre : String = ""
-    var fechaEvento : String = ""
+    var fecha : String = ""
     var duracion : Int = 0
-    var ubicacion = ""
-    private var personasApuntadas = ArrayList<Usuarios>()
+    var ubicacion : Ubicaciones = Ubicaciones()
+    var categoria : Categorias = Categorias.TALLER
+    var organizador : Organizadores = Organizadores()
+    var personasApuntadas = ArrayList<Usuarios>()
 
+    constructor(nombre: String, fecha: String,duracion:Int, ubicacion: Ubicaciones, categoria: Categorias, organizador: Organizadores) {
+        this.nombre = nombre
+        this.fecha = fecha
+        this.duracion = duracion
+        this.ubicacion = ubicacion
+        this.categoria = categoria
+        this.organizador = organizador
+    }
+
+    constructor(){}
 
     fun inscribirUsuario(usuario: Usuarios){
         if (!personasApuntadas.contains(usuario)){
@@ -13,7 +25,6 @@ class Eventos {
         }else {
             println("${usuario.nombre} ya esta apuntado al evento")
         }
-
     }
 
     fun cancelarEvento(){
@@ -29,4 +40,9 @@ class Eventos {
             i++
         }
     }
+
+    override fun toString(): String {
+        return "Evento: $nombre, Fecha: $fecha, Duración: $duracion, Ubicación: $ubicacion, Categoría: $categoria, Organizado por: ${organizador.nombre}"
+    }
+
 }
